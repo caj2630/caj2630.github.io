@@ -20,7 +20,7 @@
 <meta property="og:description" content="题目描述：  超市鸡蛋打折，阿姨们买折扣鸡蛋数量不一，现超市搞活动送鸡蛋；  有些阿姨拿了送的鸡蛋也不一定是拥有最多鸡蛋的人，有的人可以，  现在将活动鸡蛋送给大家，看看是否手上拥有的鸡蛋高于或等于最高的人，  能就是拥有最多的否则不是。 解题思路  1.找到最大值  2.讲自己拥有的和送的相加与最大值做比较  3.大于return ture否则false 代码块  123456789101112">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-06-01T14:30:40.506Z">
-<meta property="article:modified_time" content="2020-06-06T12:54:04.903Z">
+<meta property="article:modified_time" content="2020-06-07T12:07:57.148Z">
 <meta property="article:author" content="CY___yuan">
 <meta name="twitter:card" content="summary">
 
@@ -166,7 +166,7 @@
   <style>#main article .mdui-card-content .center-block{display:block!important;margin-right:auto!important;margin-left:auto!important}</style>
   <article class="mdui-card mdui-m-b-5">
     <header class="mdui-card-media">
-      <img src="/images/random/material-1.png" style="max-height: 240px;">
+      <img src="/images/random/material-11.png" style="max-height: 240px;">
       <div class="mdui-card-media-covered">
         <div class="mdui-card-primary">
           <div class="mdui-card-primary-title">每日一题 来源力扣</div>
@@ -228,6 +228,12 @@
 <h2 id="代码块-1"><a href="#代码块-1" class="headerlink" title="代码块"></a>代码块</h2><blockquote>
 <blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">var twoSum &#x3D; function(nums, target) &#123;</span><br><span class="line">  var map &#x3D; &#123;&#125;</span><br><span class="line">  var loop &#x3D; 0</span><br><span class="line">  var dic</span><br><span class="line">  while(loop &lt; nums.length) &#123;</span><br><span class="line">    dic &#x3D; target - nums[loop]</span><br><span class="line">    if (map[dic] !&#x3D;&#x3D; undefined) &#123;</span><br><span class="line">      return [map[dic], loop]</span><br><span class="line">    &#125;</span><br><span class="line">    map[nums[loop]] &#x3D; loop</span><br><span class="line">    loop++</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</blockquote>
+</blockquote>
+<h2 id="题目描述：-2"><a href="#题目描述：-2" class="headerlink" title="题目描述："></a>题目描述：</h2><p>  只出现一次的数字<br>  eg：nums = [4,1,2,1,2] return 4</p>
+<h2 id="代码块-2"><a href="#代码块-2" class="headerlink" title="代码块"></a>代码块</h2><blockquote>
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">1. 利用indexOf和lastIndexOf方法</span><br><span class="line"> var singleNumber &#x3D; function(nums) &#123;</span><br><span class="line">   nums.forEach(ele &#x3D;&gt; &#123;</span><br><span class="line">     if (nums.indexOf(ele) !&#x3D;&#x3D; nums.lastIndexOf(ele)) &#123;</span><br><span class="line">       return ele</span><br><span class="line">     &#125;</span><br><span class="line">   &#125;)</span><br><span class="line"> &#125;</span><br><span class="line">2. 先排序再对比前后是否有相同的</span><br><span class="line"> var singleNumber &#x3D; function(nums) &#123;</span><br><span class="line">   nums &#x3D; nums.sort()</span><br><span class="line">   nums.forEach((ele, index) &#x3D;&gt; &#123;</span><br><span class="line">     if (ele !&#x3D;&#x3D; nums[index - 1] &amp;&amp; ele !&#x3D;&#x3D; nums[index + 1]) &#123;</span><br><span class="line">       return ele</span><br><span class="line">     &#125;</span><br><span class="line">   &#125;)</span><br><span class="line"> &#125;</span><br><span class="line"> 3. 异或运算符</span><br><span class="line"> var singleNumber &#x3D; function(nums) &#123;</span><br><span class="line">   var temp &#x3D; 0</span><br><span class="line">   nums.forEach((ele, index) &#x3D;&gt; &#123;</span><br><span class="line">     temp ^&#x3D; ele</span><br><span class="line">   &#125;)</span><br><span class="line">   return temp</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
 </blockquote>
 </blockquote>
 
