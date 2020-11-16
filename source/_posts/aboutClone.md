@@ -6,9 +6,14 @@ title: 关于克隆那些事
 ``` bash
   浅拷贝：创建一个新对象，如果属性是基本类型则拷贝的是基本类型的值，如果是引用类型拷贝的是内存地址，如果其中一个对象改变了这个地址就会影响到另一对象
   深拷贝：将一个对象从内存中完整的拷贝一份，从堆内存中开辟一个新的区域存放新对象，修改新对象不会影响原对象
-  ![Image text](./images/deepclone.jpg)
-  ![Image text](./images/shadowclone.jpg)
+  # ![Image text](./images/deepclone.jpg)
+  # ![Image text](./images/shadowclone.jpg)
+
 ```
+![Image text](./images/deepclone.jpg)
+![Image text](./images/shadowclone.jpg)
+![微信图片_20200226163951.jpg](https://i.loli.net/2020/11/16/YnmDMgfU8arAcKt.jpg)
+
 ## 赋值、浅拷贝与深拷贝针对引用类型
 ``` bash
   赋值：赋值的是对象的地址，两个对象引用的是同一个地址，相互影响

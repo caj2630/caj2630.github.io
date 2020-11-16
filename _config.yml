@@ -3,11 +3,11 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: CY___yuan
+title: 小白
 subtitle: ''
 description: ''
 keywords:
-author: CY___yuan
+author: 小白
 language: zh-CN
 timezone: ''
 
@@ -93,7 +93,7 @@ ignore:
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: default
+theme: butterfly
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
@@ -101,3 +101,9 @@ deploy:
   type: git
   repo: git@github.com:caj2630/caj2630.github.io.git
   branch: master
+
+# A simple 404 page
+error_404:
+  enable: true
+  subtitle: "頁面沒有找到"
+  background: 
