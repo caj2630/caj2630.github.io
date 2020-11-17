@@ -51,11 +51,14 @@ title: 关于签名
 
     export default encodeURIComponentNew
 ```
+
 ### tool.js 工具文件
+
 ``` bash
     导出的encodeURIComponentNew 方法引用
     encodeURIComponentNew(params) =》 params为value值
 ```
+
 #### 处理参数排序
 
 ``` bash
@@ -123,7 +126,6 @@ title: 关于签名
       }
       t = new DataView(new Uint32Array(m).buffer)
       for (var i = 0; i < 5; i++)m[i] = t.getUint32(i << 2)
-      
       var hex = Array.prototype.map.call(new Uint8Array(new Uint32Array(m).buffer), function (e) {
           return (e < 16 ? "0" : "") + e.toString(16)
       }).join("")
@@ -133,6 +135,7 @@ title: 关于签名
 ```
 
 ### 使用
+
 ``` bash
   1.sortQueryResult(params)
   2.按照后台规则拼接字符 signature

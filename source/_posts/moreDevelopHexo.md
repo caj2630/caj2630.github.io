@@ -3,6 +3,7 @@ uuid: 8
 title: 多人开发hexo博客
 ---
 ## 前言
+
 ``` bash
   1.github添加分支为hexo（随意按照自己习惯来命名）
   2.设置hexo为默认分支

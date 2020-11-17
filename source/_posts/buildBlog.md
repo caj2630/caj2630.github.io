@@ -12,6 +12,7 @@ title: 搭建静态博客
 More info: [Github](https://github.com)
 
 ## 全局安装hexo
+
 ### 需要的环境：node git hexo
 
 More info: [Hexo](https://hexo.io/zh-cn/)
@@ -41,6 +42,7 @@ More info: [Hexo](https://hexo.io/zh-cn/)
     hexo clean
     hexo deploy
 ```
+
 ## 查看效果
 
 ``` bash

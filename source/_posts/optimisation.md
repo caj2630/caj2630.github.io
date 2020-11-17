@@ -3,6 +3,7 @@ uuid: 4
 title: 页面性能优化
 ---
 ## 浏览器部分 代码部分
+
   一、影响因素：
     1、网络层面：过多的http请求、资源访问带宽小、网页元素视频图片样式等太大
     2、浏览器渲染层面：渲染阻塞、重复渲染、dns解析
@@ -59,4 +60,3 @@ title: 页面性能优化
       5. 资源请求时间片的处理（webpack可配置）
       6. cdn
       7. quicklink：prefetch、preload、preconnect
-
