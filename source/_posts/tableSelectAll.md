@@ -1,6 +1,12 @@
 ---
 uuid: 5
 title: 'elementUI中表格多选实现跨页多选'
+date: 2020-11-16
+categories: 
+- 项目疑难杂症
+tags:
+- element表格
+- 跨页多选
 ---
 ## element框架当前页多选
 
