@@ -1,10 +1,10 @@
 ---
 title: '我遇到的Eslint'
-date: 2021-11-06
-categories:
-- 项目疑难杂症
+date: 2021-11-06 
+categories: 
+ - 项目疑难杂症
 tags:
--eslint
+ - eslint
 ---
 
 ### Eslint文件结构

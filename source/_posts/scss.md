@@ -4,7 +4,7 @@ title: 'SASS sass'
 date: 2021-11-08
 categories:
 - css
-  tags:
+tags:
 - sass
 ---
 
