@@ -8,8 +8,13 @@ tags:
 - 自定义命令
 ---
 ## nodejs环境下的命令行参数解析工具
+
 ### yargs
+**支持自动生成help内容，必填参数有检查校验**
+**定义较为复杂**
+
 Yargs 框架通过使用 Node.js 构建功能全面的命令行应用，它能轻松配置命令，解析多个参数，并设置快捷方式等，还能自动生成帮助菜单。
+
 传送门：[https://github.com/yargs/yargs](https://github.com/yargs/yargs)
 ```javascript
 #!/usr/bin/env node
@@ -66,7 +71,29 @@ yargs(cli)
 ```
 
 ### commander
+**支持自动生成help内容，主要通过方法调用**
+**required不做检查，需自己校验检查参数到底有没有传**
+
+传送门：[https://github.com/tj/commander.js/blob/master/Readme_zh-CN.md](https://github.com/tj/commander.js/blob/master/Readme_zh-CN.md)
+
+安装 `npm install commander`
+```javascript
+#!/usr/bin/env node
+
+const { Command } = require('commander');
+const program = new Command();
+
+program
+    .version('0.0.1', '-v', 'version') // 默认-V
+    .option('-c, --cheese <type>', 'add the specified type of cheese', 'blue') // 短标志，自定义标志，选项描述（可省略），默认值（可省略）
+    .requiredOption('-c, --cheese <type>', 'pizza must have cheese') // 必填选项,必填选项要么设有默认值，要么必须在命令行中输入，对应的属性字段在解析时必定会有赋值
+    .parse(process.argv)
+
+console.log(`cheese: ${program.opts().cheese}`);
+```
 
 
 
 ### meow
+**简单，结构设计较好**
+**不支持自动生成help内容，需手动写**
