@@ -1,6 +1,12 @@
 ---
 uuid: 6
 title: 关于签名
+categories:
+- [项目扩展]
+- [校验]
+tags:
+- 校验
+- 加密
 ---
 ### 新增一个utf8.js
 

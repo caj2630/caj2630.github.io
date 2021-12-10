@@ -3,7 +3,8 @@ uuid: 6
 title: 'SASS sass'
 date: 2021-11-08
 categories:
-- css
+- 样式
+- sass
 tags:
 - sass
 ---

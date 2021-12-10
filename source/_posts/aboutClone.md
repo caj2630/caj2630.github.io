@@ -1,6 +1,11 @@
 ---
 uuid: 5
 title: 关于克隆那些事
+categories:
+- js
+tags:
+- 克隆
+- 拷贝
 ---
 ## 浅拷贝与深拷贝
 
@@ -12,8 +17,8 @@ title: 关于克隆那些事
 
 ```
 
-![Image text](./images/deepclone.jpg)
-![Image text](./images/shadowclone.jpg)
+![Image text](images/deepclone.jpg)
+![Image text](images/shadowclone.jpg)
 ![微信图片_20200226163951.jpg](https://i.loli.net/2020/11/16/YnmDMgfU8arAcKt.jpg)
 
 ## 赋值、浅拷贝与深拷贝针对引用类型

@@ -2,8 +2,8 @@
 uuid: 6
 title: '全屏展示'
 date: 2020-11-06
-categories: 
-- 项目疑难杂症
+categories:
+- 项目扩展
 tags:
 - 全屏展示大数据
 ---

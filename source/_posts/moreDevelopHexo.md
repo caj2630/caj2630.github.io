@@ -1,6 +1,11 @@
 ---
 uuid: 8
 title: 多人开发hexo博客
+categories:
+- 博客
+- hexo
+tags:
+- hexo
 ---
 ## 前言
 

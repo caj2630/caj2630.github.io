@@ -2,7 +2,7 @@
 title: '关于vee-validate插件使用'
 date: 2021-11-10
 categories:
-- [项目疑难杂症]
+- [项目扩展]
 - [校验]
 - [vue]
 - [ElementUi]

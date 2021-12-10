@@ -1,6 +1,11 @@
 ---
 uuid: 1
 title: 搭建静态博客
+categories:
+- 博客
+- hexo
+tags:
+- 使用hexo搭建博客
 ---
 
 ## 新建仓库

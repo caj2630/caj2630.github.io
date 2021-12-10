@@ -2,7 +2,7 @@
 title: '我遇到的Eslint'
 date: 2021-11-06 
 categories: 
- - 项目疑难杂症
+ - 项目扩展
 tags:
  - eslint
 ---
