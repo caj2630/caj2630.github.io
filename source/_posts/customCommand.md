@@ -9,6 +9,7 @@ tags:
 ---
 ## nodejs环境下的命令行参数解析工具
 ### yargs
+Yargs 框架通过使用 Node.js 构建功能全面的命令行应用，它能轻松配置命令，解析多个参数，并设置快捷方式等，还能自动生成帮助菜单。
 传送门：[https://github.com/yargs/yargs](https://github.com/yargs/yargs)
 ```javascript
 #!/usr/bin/env node
