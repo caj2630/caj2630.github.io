@@ -1,0 +1,200 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>webpack | 元气满满</title><meta name="keywords" content="webpack"><meta name="author" content="元气满满"><meta name="copyright" content="元气满满"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><meta name="description" content="##webpack编译流程  运行流程是串行的过程   初始化：启动构建、读取和合并配置参数，实例化compiler（全局只有一个，包含了完整的webpack配置，负责文件监听和启动编译），执行配置文件中的插件加载plugin（在构建过程中的特定时机会广播出对应的事件，插件可以监听到这些事件的发生，在特定的时机做出对应的事情），执行对象的run方法开始编译； 编译：从entry入口解析，针对每个模">
+<meta property="og:type" content="article">
+<meta property="og:title" content="webpack">
+<meta property="og:url" content="http://yoursite.com/2021/12/21/webpack/index.html">
+<meta property="og:site_name" content="元气满满">
+<meta property="og:description" content="##webpack编译流程  运行流程是串行的过程   初始化：启动构建、读取和合并配置参数，实例化compiler（全局只有一个，包含了完整的webpack配置，负责文件监听和启动编译），执行配置文件中的插件加载plugin（在构建过程中的特定时机会广播出对应的事件，插件可以监听到这些事件的发生，在特定的时机做出对应的事情），执行对象的run方法开始编译； 编译：从entry入口解析，针对每个模">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/jerryc127/CDN@latest/cover/default_bg3.png">
+<meta property="article:published_time" content="2021-12-20T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-12-28T14:14:48.585Z">
+<meta property="article:author" content="元气满满">
+<meta property="article:tag" content="webpack">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/jerryc127/CDN@latest/cover/default_bg3.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://yoursite.com/2021/12/21/webpack/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  ClickShowText: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  justifiedGallery: {
+    js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+    css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+};
+
+var saveToLocal = {
+  set: function setWithExpiry(key, value, ttl) {
+    const now = new Date()
+    const expiryDay = ttl * 86400000
+    const item = {
+      value: value,
+      expiry: now.getTime() + expiryDay,
+    }
+    localStorage.setItem(key, JSON.stringify(item))
+  },
+
+  get: function getWithExpiry(key) {
+    const itemStr = localStorage.getItem(key)
+
+    if (!itemStr) {
+      return undefined
+    }
+    const item = JSON.parse(itemStr)
+    const now = new Date()
+
+    if (now.getTime() > item.expiry) {
+      localStorage.removeItem(key)
+      return undefined
+    }
+    return item.value
+  }
+}</script><script id="config_change">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2021-12-28 22:14:48'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(function () {  window.activateDarkMode = function () {
+    document.documentElement.setAttribute('data-theme', 'dark')
+    if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+    }
+  }
+  window.activateLightMode = function () {
+    document.documentElement.setAttribute('data-theme', 'light')
+   if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+    }
+  }
+  const autoChangeMode = 'false'
+  const t = saveToLocal.get('theme')
+  if (autoChangeMode === '1') {
+    const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+    const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+    const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+    const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+    if (t === undefined) {
+      if (isLightMode) activateLightMode()
+      else if (isDarkMode) activateDarkMode()
+      else if (isNotSpecified || hasNoSupport) {
+        const now = new Date()
+        const hour = now.getHours()
+        const isNight = hour <= 6 || hour >= 18
+        isNight ? activateDarkMode() : activateLightMode()
+      }
+      window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+        if (saveToLocal.get('theme') === undefined) {
+          e.matches ? activateDarkMode() : activateLightMode()
+        }
+      })
+    } else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else if (autoChangeMode === '2') {
+    const now = new Date()
+    const hour = now.getHours()
+    const isNight = hour <= 6 || hour >= 18
+    if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+    else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else {
+    if (t === 'dark') activateDarkMode()
+    else if (t === 'light') activateLightMode()
+  }const asideStatus = saveToLocal.get('aside-status')
+if (asideStatus !== undefined) {
+   if (asideStatus === 'hide') {
+     document.documentElement.classList.add('hide-aside')
+   } else {
+     document.documentElement.classList.remove('hide-aside')
+   }
+}})()</script><meta name="generator" content="Hexo 5.4.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="/null" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">19</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">20</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">17</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> 清单</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://cdn.jsdelivr.net/gh/jerryc127/CDN@latest/cover/default_bg3.png)"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">元气满满</a></span><span id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> 清单</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><span class="close" id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></span></span></nav><div id="post-info"><h1 class="post-title">webpack</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-12-20T16:00:00.000Z" title="发表于 2021-12-21 00:00:00">2021-12-21</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-12-28T14:14:48.585Z" title="更新于 2021-12-28 22:14:48">2021-12-28</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/webpack/">webpack</a></span></div><div class="meta-secondline"> <span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>##webpack编译流程</p>
+<blockquote>
+<p>运行流程是串行的过程</p>
+</blockquote>
+<ul>
+<li>初始化：启动构建、读取和合并配置参数，实例化compiler（全局只有一个，包含了完整的webpack配置，负责文件监听和启动编译），执行配置文件中的插件加载plugin（在构建过程中的特定时机会广播出对应的事件，插件可以监听到这些事件的发生，在特定的时机做出对应的事情），执行对象的run方法开始编译；</li>
+<li>编译：从entry入口解析，针对每个模块串行调用对应的loader，再找到模块依赖的模块，递归的进行编译处理直到所有入口依赖文件都处理完，得到每个被翻译后的模块及它们之间的关系；</li>
+<li>输出：对编译后的模块组合成chunk,把chunk转换成文件，把文件内容写入到文件系统。</li>
+</ul>
+<blockquote>
+<p>module 就是没有被编译之前的代码，通过 webpack 的根据文件引用关系生成 chunk 文件，webpack 处理好 chunk 文件后，生成运行在浏览器中的代码 bundle</p>
+</blockquote>
+<p>###hash、chunkhash、contenthash<br>hash：所有文件哈希值相同，只要改变内容跟之前的不一致，所有哈希值都改变，没有做到缓存意义<br>chunkhash：根据不同的入口文件(Entry)进行依赖文件解析、构建对应的 chunk，生成对应的哈希值，多个入口时改变一个chunk的内容另一个chunk的hash值不会被改变。css、js的hash值相同，无论是修改css还是jshash值都会改变。<br>js设置chunkhash,css设置contenthash，css改变则css和js的hash值都会改变，改变js则css被缓存hash值不会被改变<br>css设置chunkhash，js设置contenthash，css改变则js被缓存hash值不会改变，js改变了css和js的hash值都会改变，<br>contenthash：css修改内容不会影响到js的hash值，js同理</p>
+<figure class="highlight plaintext"><figcaption><span>6</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">const MiniCssExtractPlugin = require(&quot;mini-css-extract-plugin&quot;);</span><br><span class="line">module.exports = &#123;</span><br><span class="line">    mode: &quot;production&quot;,</span><br><span class="line">    entry: &#123;</span><br><span class="line">        index: &quot;./src/index.js&quot;,</span><br><span class="line">        chunk1: &quot;./src/chunk1.js&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    output: &#123;</span><br><span class="line">        filename: &quot;[name].[contenthash].js&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    module: &#123;</span><br><span class="line">        rules: [</span><br><span class="line">            &#123;</span><br><span class="line">                test: /\.css$/,</span><br><span class="line">                use: [</span><br><span class="line">                    MiniCssExtractPlugin.loader,</span><br><span class="line">                    &quot;css-loader&quot;</span><br><span class="line">                ]</span><br><span class="line">            &#125;</span><br><span class="line">        ]</span><br><span class="line">    &#125;,</span><br><span class="line">    plugins: [</span><br><span class="line">        new MiniCssExtractPlugin(&#123;</span><br><span class="line">            filename: &quot;[name].[chunkhash].css&quot;</span><br><span class="line">        &#125;)</span><br><span class="line">    ]</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><code>library:&#123;type:&#39;umd&#39;&#125;打包类型</code></p>
+<blockquote>
+<p>commonjs引入<br>引入import _ from ‘lodash’;</p>
+</blockquote>
+<blockquote>
+<p>ts引入<br> 引入import * as _ from ‘lodash’;</p>
+</blockquote>
+<p> 如果想用commonjs语法引用则需要在tsconfig.json中配置”allowSyntheticDefaultImports”: true 和 “esModuleInterop”: true</p>
+<p>延伸：</p>
+<blockquote>
+<p>node模块系统遵循的是commonjs规范</p>
+</blockquote>
+<p>exports 和 module.exports(文件实际导出的是module.exports指向的内存，exports是为module.exports添加属性)</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">exports</span> = <span class="built_in">module</span>.exports = &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// a文件</span></span><br><span class="line"><span class="built_in">exports</span>.a = <span class="number">2</span></span><br><span class="line"><span class="built_in">exports</span> = <span class="number">3</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">module</span>.exports, <span class="built_in">exports</span>) <span class="comment">// &#123;a:2&#125; 3</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// b文件</span></span><br><span class="line"><span class="keyword">let</span> a = <span class="built_in">require</span>(<span class="string">&#x27;./a.js&#x27;</span>)</span><br><span class="line"><span class="built_in">console</span>.log(a) <span class="comment">// &#123;a:2&#125;</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>ES中的导入导出<br>export 和 export default</p>
+</blockquote>
+<figure class="highlight plaintext"><figcaption><span>6</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">// a.js</span><br><span class="line">export const age = 18</span><br><span class="line">function getName () &#123;</span><br><span class="line">    return &#x27;zs&#x27;</span><br><span class="line">&#125;</span><br><span class="line">export &#123; getName &#125;</span><br><span class="line">export const getGender = function () &#123;</span><br><span class="line">    return &#x27;男&#x27;</span><br><span class="line">&#125;</span><br><span class="line">const height = 180</span><br><span class="line">export default height</span><br><span class="line"></span><br><span class="line">// b.js</span><br><span class="line">import &#123;age, getName, getGender&#125; from &quot;./a.js&quot;</span><br><span class="line"></span><br><span class="line">import height from &quot;./a.js&quot;</span><br><span class="line"></span><br><span class="line">import * as person from &quot;./a.js&quot;</span><br><span class="line">person.height // error, as整合了整个对象，export default是导出了defaul属性</span><br><span class="line">person.default // 180</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">元气满满</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://yoursite.com/2021/12/21/webpack/">http://yoursite.com/2021/12/21/webpack/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://yoursite.com" target="_blank">元气满满</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/webpack/">webpack</a></div><div class="post_share"><div class="social-share" data-image="https://cdn.jsdelivr.net/gh/jerryc127/CDN@latest/cover/default_bg3.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2021/12/21/buildBlog/"><img class="prev-cover" src="https://cdn.jsdelivr.net/gh/jerryc127/CDN@latest/cover/default_bg2.png" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">搭建静态博客</div></div></a></div><div class="next-post pull-right"><a href="/2021/11/20/customCommand/"><img class="next-cover" src="https://cdn.jsdelivr.net/gh/jerryc127/CDN@latest/cover/default_bg.png" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">关于node中自定义命令的看法</div></div></a></div></nav></div><div class="aside_content" id="aside_content"><div class="card-widget card-info"><div class="card-content"><div class="card-info-avatar is-center"><img class="avatar-img" src="/null" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">元气满满</div><div class="author-info__description"></div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">19</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">20</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">17</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div></div><div class="card-widget card-announcement"><div class="card-content"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="card-content"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2021/12/21/optimisation/" title="页面性能优化"><img src="https://cdn.jsdelivr.net/gh/jerryc127/CDN@latest/cover/default_bg2.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="页面性能优化"/></a><div class="content"><a class="title" href="/2021/12/21/optimisation/" title="页面性能优化">页面性能优化</a><time datetime="2021-12-21T14:24:19.542Z" title="发表于 2021-12-21 22:24:19">2021-12-21</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/12/21/practice/" title="每日一题 来源力扣"><img src="https://cdn.jsdelivr.net/gh/jerryc127/CDN@latest/cover/default_bg3.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="每日一题 来源力扣"/></a><div class="content"><a class="title" href="/2021/12/21/practice/" title="每日一题 来源力扣">每日一题 来源力扣</a><time datetime="2021-12-21T14:24:19.542Z" title="发表于 2021-12-21 22:24:19">2021-12-21</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/12/21/scrollBehavior/" title="scrollBehavior 滚动行为"><img src="https://cdn.jsdelivr.net/gh/jerryc127/CDN@latest/cover/default_bg3.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="scrollBehavior 滚动行为"/></a><div class="content"><a class="title" href="/2021/12/21/scrollBehavior/" title="scrollBehavior 滚动行为">scrollBehavior 滚动行为</a><time datetime="2021-12-21T14:24:19.542Z" title="发表于 2021-12-21 22:24:19">2021-12-21</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/12/21/sign/" title="关于签名"><img src="https://cdn.jsdelivr.net/gh/jerryc127/CDN@latest/cover/default_bg.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="关于签名"/></a><div class="content"><a class="title" href="/2021/12/21/sign/" title="关于签名">关于签名</a><time datetime="2021-12-21T14:24:19.542Z" title="发表于 2021-12-21 22:24:19">2021-12-21</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/12/21/moreDevelopHexo/" title="多人开发hexo博客"><img src="https://cdn.jsdelivr.net/gh/jerryc127/CDN@latest/cover/default_bg3.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="多人开发hexo博客"/></a><div class="content"><a class="title" href="/2021/12/21/moreDevelopHexo/" title="多人开发hexo博客">多人开发hexo博客</a><time datetime="2021-12-21T14:24:19.541Z" title="发表于 2021-12-21 22:24:19">2021-12-21</time></div></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By 元气满满</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><div class="js-pjax"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></div></body></html>
