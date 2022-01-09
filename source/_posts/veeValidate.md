@@ -10,11 +10,11 @@ tags:
 - vee-validate3.x
 ---
 
-##使用vee-validate
+## 使用vee-validate
 
 安装 npm install vee-validate（3.x版本的）
 
-###引入并配置规则
+### 引入并配置规则
 ```ecmascript 6
 import { extend } from 'vee-validate';
 import { required, email } from 'vee-validate/dist/rules';
@@ -69,7 +69,7 @@ extend("customRegIdCard", {
     },
 });
 ```
-###使用
+### 使用
 ```html
 <ValidationObserver ref="observe">
     <ValidationProvider name="email" rules="required|email">
@@ -96,7 +96,7 @@ extend("customRegIdCard", {
     };
 </script>
 ```
-###结合ElementUI使用
+### 结合ElementUI使用
 ```html
 <ValidationObserver ref="observe">
     <el-form>
