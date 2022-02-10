@@ -17,22 +17,32 @@ tags:
 
 ### 组件传值
 一：父传子
-  props
+
+  1.props
+
 二：子传父
-  $emit（"事件名", 值（可多个））
-  $parent/$children $ref
+
+  1.$emit（"事件名", 值（可多个））
+
+  2.$parent/$children $ref
+
 三：兄弟传值
-  vuex
-  $emit和props组合
-  EventBus(创建一个EventBus.js文件，在需要的组件中引入/main.js文件引入，传值：event.$emit("事件名", 值)，接收：event.$on("事件名", (值)=>{}))
+
+  1.vuex
+
+  2.$emit和props组合
+
+  3.EventBus(创建一个EventBus.js文件，在需要的组件中引入/main.js文件引入，传值：event.$emit("事件名", 值)，接收：event.$on("事件名", (值)=>{}))
 ```js
 // EventBus.js 暴露vue实例
 import Vue from "Vue"
 export default new Vue()
 ```
 四：多层父子组件通信
-  vuex
-  provide/inject
+
+  1.vuex
+
+  2.provide/inject
 
 ```js
 // 方法一：不能实时更新
