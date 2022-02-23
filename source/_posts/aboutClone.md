@@ -46,17 +46,17 @@ tags:
   3. jQuery.extend()方法   $.extend(deepCopy, target, object1, [objectN]) // 第一个参数为true,就是深拷贝
   4. 手写递归方法 原理：遍历对象、数组直到里边都是基本数据类型，然后再去复制
   
-    function cloneDeep (obj, hash = new weakMap()) {
+    function deepClone (obj, map = new Map()) {
       if (obj === null) return obj // 如果是null或者undefined则不进行拷贝操作
       if (obj instanceof Date) return new Date(obj)
       if (obj instanceof RegExp) return new RegExp(obj) // 正则和时间对象
       if (typeof obj !== 'object') return obj // 可能是对象、普通的值，函数不需要拷贝
-      if (hash.get(obj)) return hash.get(obj)
+      if (map.get(obj)) return map.get(obj)
       let cloneObj = new obj.constructor() // 找到的是所属类原型上的constructor，而原型上的constructor指向的是当前类本身
-      hash.set(obj, cloneObj)
+      map.set(obj, cloneObj)
       for(let key in obj) {
         if (obj.hasOwnProperty(key)) {
-          cloneObj[key] = deepClone(obj[key], hash)
+          cloneObj[key] = deepClone(obj[key], map)
         }
       }
       return cloneObj

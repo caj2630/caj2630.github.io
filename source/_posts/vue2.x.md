@@ -46,9 +46,7 @@ tags:
 
 ### 组件传值
 
-一：父传子
-
-1.props
+一：父传子（props）
 
 二：子传父
 
@@ -96,6 +94,13 @@ provide () {
 inject: ['parentObj']
 
 ```
+### 数据双向绑定
+>vue是一个mvvm框架，数据双向绑定对于ui控件而言，非ui控件不会涉及到数据双向绑定。vuex是单向数据流，**全局性数据流使用单项方便跟踪，局部数据流使用双向简易操作**
+
+Object.defineProperty()函数可以定义对象属性相关描述符，其中get和set方法对于完成双向数据流起到了至关重要作用。
+实现思路：
+  简易版本：获取input输入框内容，Object.defineProperty()方法操作属性，get获取value，set设置值并改变innerhtml展示值
+  vue版本：documentFragment（通过操作documentFragment文档片段操作dom而不会影响到真实到dom，操作完成之后可以添加到真实到dom上，这样到效率比直接在dom上修改要高很多）
 
 ## 引言
 
