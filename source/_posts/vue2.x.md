@@ -24,6 +24,7 @@ tags:
 一个核心思想: 数据驱动。视图由数据驱动生成。
 
 > 虚拟dom:用原生js对象去描述一个dom节点。
+> 流程：new Vue() => init => $mount => compile => render => VNode => patch => DOM
 
 调用**this._init()**初始化。如果有el属性则调用**vm.$mount(vm.$options.el)**，将目标模板渲染成最终的DOM。
 > 初始化做的事情：
@@ -37,6 +38,10 @@ tags:
 **new Watcher**在这里有两个作用：
 * 初始化执行回调函数。
 * 当vm实例中检测的数据发生变化的时候执行回调函数。
+
+**_render()**方法实际是通过createElement方法将实例渲染成虚拟Node，每个VNode都有children，children每个元素都是一个VNode，这样就形成了一个DOM tree。
+
+**_update**方法将VNode渲染成真正到DOM并渲染出来，调用时机和watcher一样，一个是首次渲染，一次是数据更新。**_update**核心是**__patch__**方法，该方法到定义是调用了**createPatchFunction**方法的返回值
 
 ### 组件化
 
