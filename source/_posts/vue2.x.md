@@ -49,6 +49,17 @@ tags:
 
 > 把页面拆分多个组件，每个组件依赖的css，图片等放到一起开发维护，组件是资源独立的，每个组件在系统内是可复用的，组件之间可相互嵌套。
 
+**createComponent**方法实际做了三步：构造子类函数，安装组件钩子函数，实例化vnode.
+*构造子类函数：**Vue.extend()**使用了一种非常经典的原型继承方法把一个纯对象转换成一个继承于Vue的构造器的Sub并返回
+```js
+const Sub = function VueComponent (options) {
+    this._init(options)
+}
+Sub.prototype = Object.create(Super.prototype) // Super指向Vue
+Sub.prototype.constructor = Sub
+```
+*实例化Vnode：和普通的元素节点vnode不同，组件的vnode没有children。
+
 ### 组件传值
 
 一：父传子（props）
