@@ -23,7 +23,7 @@ tags:
 
 一个核心思想: 数据驱动。视图由数据驱动生成。
 
-> 虚拟dom:用原生js对象去描述一个dom节点。
+> 虚拟dom:用原生js对象去描述一个dom节点层次结构。
 > 流程：new Vue() => init => $mount => compile => render => VNode => patch => DOM
 
 调用**this._init()**初始化。如果有el属性则调用**vm.$mount(vm.$options.el)**，将目标模板渲染成最终的DOM。
