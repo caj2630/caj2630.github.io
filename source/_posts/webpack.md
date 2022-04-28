@@ -22,6 +22,7 @@ css设置chunkhash，js设置contenthash，css改变则js被缓存hash值不会�
 contenthash：css修改内容不会影响到js的hash值，js同理
 ```ecmascript 6
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const { VueLoaderPlugin } = require('vue-loader')
 module.exports = {
     mode: "production",
     entry: {
@@ -37,15 +38,21 @@ module.exports = {
                 test: /\.css$/,
                 use: [
                     MiniCssExtractPlugin.loader,
-                    "css-loader"
+                    "style-loader", // 将样式插入到style标签中
+                    "css-loader" // 处理样式中url
                 ]
-            }
+            },
+           {
+            test: /\.vue/,
+            use: "vue-loader" // 提取其中的代码交由其他loader处理；比如style中的代码交给css-loader等处理
+           }
         ]
     },
     plugins: [
         new MiniCssExtractPlugin({
             filename: "[name].[chunkhash].css"
-        })
+        }),
+        new VueLoaderPlugin() // 将定义过的其他规则复制并应用到.vue文件中
     ]
 };
 
