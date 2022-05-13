@@ -9,13 +9,12 @@ tags:
 ---
 ## 浅拷贝与深拷贝
 
-``` bash
-  浅拷贝：创建一个新对象，如果属性是基本类型则拷贝的是基本类型的值，如果是引用类型拷贝的是内存地址，如果其中一个对象改变了这个地址就会影响到另一对象
-  深拷贝：将一个对象从内存中完整的拷贝一份，从堆内存中开辟一个新的区域存放新对象，修改新对象不会影响原对象
-  # ![Image text](./images/deepclone.jpg)
-  # ![Image text](./images/shadowclone.jpg)
+  >浅拷贝：创建一个新对象，如果属性是基本类型则拷贝的是基本类型的值，如果是引用类型拷贝的是内存地址，如果其中一个对象改变了这个地址就会影响到另一对象
+  >深拷贝：将一个对象从内存中完整的拷贝一份，从堆内存中开辟一个新的区域存放新对象，修改新对象不会影响原对象
 
-```
+![Image text](./images/deepclone.jpg)
+![Image text](./images/shadowclone.jpg)
+
 
 ![Image text](images/deepclone.jpg)
 ![Image text](images/shadowclone.jpg)
@@ -40,13 +39,12 @@ tags:
 
 ## 深拷贝
 
+ 1. JSON.parse(JSON.stringify()), 利用stringify将对象转出json字符串，再利用parse把字符串解析成对象，一来一去新对象产生了而且对象会开辟新的栈实现深拷贝（不能处理正则 -> 空对象 和函数 -> null）
+ 2. 函数库lodash的_.cloneDeep方法
+ 3. jQuery.extend()方法   $.extend(deepCopy, target, object1, [objectN]) // 第一个参数为true,就是深拷贝
+ 4. 手写递归方法 原理：遍历对象、数组直到里边都是基本数据类型，然后再去复制
 ``` bash
- 1. JSON.parse(JSON.stringify()), 利用stringfy将对象转出json字符串，再利用parse把字符串解析成对象，一来一去新对象产生了而且对象会开辟新的栈实现深拷贝（不能处理正则 -> 空对象 和函数 -> null）
-  2. 函数库lodash的_.cloneDeep方法
-  3. jQuery.extend()方法   $.extend(deepCopy, target, object1, [objectN]) // 第一个参数为true,就是深拷贝
-  4. 手写递归方法 原理：遍历对象、数组直到里边都是基本数据类型，然后再去复制
-  
-    function deepClone (obj, map = new Map()) {
+    function deepClone (obj, map = new weakMap()) {
       if (obj === null) return obj // 如果是null或者undefined则不进行拷贝操作
       if (obj instanceof Date) return new Date(obj)
       if (obj instanceof RegExp) return new RegExp(obj) // 正则和时间对象
