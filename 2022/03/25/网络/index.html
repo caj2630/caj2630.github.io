@@ -1,0 +1,208 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>网络 | 元气满满</title><meta name="keywords" content="tcp/ip"><meta name="author" content="元气满满"><meta name="copyright" content="元气满满"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><meta name="description" content="TCP&#x2F;IP TCP协议保证数据传输可靠性方式有：    校验和 检测数据在传输过程中的变化，如果收到检测有差错TCP将丢弃。   确认应答 + 序列号 给发送的每一个包进行编号，接收方对数据包进行排序。   超时重传 发送方没有接收到响应报文原因： 1.数据在传输过程中由于网络问题直接全体丢包，接收方没有接收到；2.接收方收到了响应数据，但是发送的报文响应由于网络丢包了。当TCP发出一个段后，启">
+<meta property="og:type" content="article">
+<meta property="og:title" content="网络">
+<meta property="og:url" content="http://yoursite.com/2022/03/25/%E7%BD%91%E7%BB%9C/index.html">
+<meta property="og:site_name" content="元气满满">
+<meta property="og:description" content="TCP&#x2F;IP TCP协议保证数据传输可靠性方式有：    校验和 检测数据在传输过程中的变化，如果收到检测有差错TCP将丢弃。   确认应答 + 序列号 给发送的每一个包进行编号，接收方对数据包进行排序。   超时重传 发送方没有接收到响应报文原因： 1.数据在传输过程中由于网络问题直接全体丢包，接收方没有接收到；2.接收方收到了响应数据，但是发送的报文响应由于网络丢包了。当TCP发出一个段后，启">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/jerryc127/CDN@latest/cover/default_bg3.png">
+<meta property="article:published_time" content="2022-03-25T15:09:12.204Z">
+<meta property="article:modified_time" content="2022-03-25T15:15:55.223Z">
+<meta property="article:author" content="元气满满">
+<meta property="article:tag" content="tcp&#x2F;ip">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/jerryc127/CDN@latest/cover/default_bg3.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://yoursite.com/2022/03/25/%E7%BD%91%E7%BB%9C/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  ClickShowText: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  justifiedGallery: {
+    js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+    css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+};
+
+var saveToLocal = {
+  set: function setWithExpiry(key, value, ttl) {
+    const now = new Date()
+    const expiryDay = ttl * 86400000
+    const item = {
+      value: value,
+      expiry: now.getTime() + expiryDay,
+    }
+    localStorage.setItem(key, JSON.stringify(item))
+  },
+
+  get: function getWithExpiry(key) {
+    const itemStr = localStorage.getItem(key)
+
+    if (!itemStr) {
+      return undefined
+    }
+    const item = JSON.parse(itemStr)
+    const now = new Date()
+
+    if (now.getTime() > item.expiry) {
+      localStorage.removeItem(key)
+      return undefined
+    }
+    return item.value
+  }
+}</script><script id="config_change">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-03-25 23:15:55'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(function () {  window.activateDarkMode = function () {
+    document.documentElement.setAttribute('data-theme', 'dark')
+    if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+    }
+  }
+  window.activateLightMode = function () {
+    document.documentElement.setAttribute('data-theme', 'light')
+   if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+    }
+  }
+  const autoChangeMode = 'false'
+  const t = saveToLocal.get('theme')
+  if (autoChangeMode === '1') {
+    const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+    const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+    const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+    const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+    if (t === undefined) {
+      if (isLightMode) activateLightMode()
+      else if (isDarkMode) activateDarkMode()
+      else if (isNotSpecified || hasNoSupport) {
+        const now = new Date()
+        const hour = now.getHours()
+        const isNight = hour <= 6 || hour >= 18
+        isNight ? activateDarkMode() : activateLightMode()
+      }
+      window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+        if (saveToLocal.get('theme') === undefined) {
+          e.matches ? activateDarkMode() : activateLightMode()
+        }
+      })
+    } else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else if (autoChangeMode === '2') {
+    const now = new Date()
+    const hour = now.getHours()
+    const isNight = hour <= 6 || hour >= 18
+    if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+    else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else {
+    if (t === 'dark') activateDarkMode()
+    else if (t === 'light') activateLightMode()
+  }const asideStatus = saveToLocal.get('aside-status')
+if (asideStatus !== undefined) {
+   if (asideStatus === 'hide') {
+     document.documentElement.classList.add('hide-aside')
+   } else {
+     document.documentElement.classList.remove('hide-aside')
+   }
+}})()</script><meta name="generator" content="Hexo 5.4.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="/null" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">30</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">32</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">20</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> 清单</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://cdn.jsdelivr.net/gh/jerryc127/CDN@latest/cover/default_bg3.png)"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">元气满满</a></span><span id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> 清单</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><span class="close" id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></span></span></nav><div id="post-info"><h1 class="post-title">网络</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-03-25T15:09:12.204Z" title="发表于 2022-03-25 23:09:12">2022-03-25</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-03-25T15:15:55.223Z" title="更新于 2022-03-25 23:15:55">2022-03-25</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/js/">js</a></span></div><div class="meta-secondline"> <span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h3 id="TCP-IP"><a href="#TCP-IP" class="headerlink" title="TCP/IP"></a>TCP/IP</h3><blockquote>
+<p>TCP协议保证数据传输可靠性方式有： </p>
+</blockquote>
+<ol>
+<li>校验和<blockquote>
+<p>检测数据在传输过程中的变化，如果收到检测有差错TCP将丢弃。</p>
+</blockquote>
+</li>
+<li>确认应答 + 序列号<blockquote>
+<p>给发送的每一个包进行编号，接收方对数据包进行排序。</p>
+</blockquote>
+</li>
+<li>超时重传<blockquote>
+<p>发送方没有接收到响应报文原因： 1.数据在传输过程中由于网络问题直接全体丢包，接收方没有接收到；2.接收方收到了响应数据，但是发送的报文响应由于网络丢包了。<br>当TCP发出一个段后，启动一个定时器，等待目的端确认收到这个报文段，如果不能及时收到就会进行重发。</p>
+</blockquote>
+</li>
+<li>流量控制（可变大小的滑动窗口协议）<blockquote>
+<p>TCP连接的每一方都有固定大小的缓存空间，TCP接收端只允许发送端发送接收端缓冲区能接纳的数据，如果接收端处理来不及能提示发送方降低发送速率防止丢包。</p>
+</blockquote>
+</li>
+<li>拥塞控制<blockquote>
+<p>发送方发送数据前对比接收方发过来的即时窗口，取小，<strong>慢启动</strong>，拥塞避免，拥塞发送，快速恢复。</p>
+</blockquote>
+</li>
+</ol>
+<h3 id="跨域"><a href="#跨域" class="headerlink" title="跨域"></a>跨域</h3><blockquote>
+<p>浏览器的同源策略限制<br>同源策略是一种约定，两个页面具有相同的协议、域名和端口。</p>
+</blockquote>
+<h4 id="非同源限制"><a href="#非同源限制" class="headerlink" title="非同源限制"></a>非同源限制</h4><blockquote>
+<p>读取不到非同源网页的cookie、localstorage、indexDB<br>无法向非同源网页发送请求<br>无法操作非同源网页的dom</p>
+</blockquote>
+<h4 id="解决跨域方法"><a href="#解决跨域方法" class="headerlink" title="解决跨域方法"></a>解决跨域方法</h4><ol>
+<li><strong>document.domain</strong>,设置两个相同值就可以共享cookie，此方案仅限主域相同（document.domain = xxx）</li>
+<li><strong>window.postMessage()</strong>,页面和其他打开的新窗口进行数据传递、多窗口消息传递、页面与嵌套的iframe消息传递。</li>
+<li><strong>jsonp</strong>是服务端和客户端跨源通信的常用方法。只支持get请求。<blockquote>
+<p>核心思想：通过添加一个<scritpt>元素，向服务器请求json数据，服务器收到请求后将数据放在指定的名字回调函数参数位置传回来。</p>
+</blockquote>
+</li>
+<li><strong>CORS</strong>跨域资源共享，<blockquote>
+<p>普通跨域请求： 服务器设置ACAO<br>带cookie跨域请求：前后台都需设置（前端设置withCredentials）</p>
+</blockquote>
+</li>
+<li><strong>proxy</strong>代理</li>
+</ol>
+<h3 id="从输入URL到页面渲染"><a href="#从输入URL到页面渲染" class="headerlink" title="从输入URL到页面渲染"></a>从输入URL到页面渲染</h3><ol>
+<li>输入url</li>
+<li>查找缓存（浏览器缓存=》系统缓存=》路由缓存）：查找缓存中是否有该地址页面，有则显示没有则进行下一步</li>
+<li>DNS域名解析：解析该URL中的域名对应的ip地址</li>
+<li>建立TCP连接：解析ip地址后，根据ip地址和默认端口80，与服务器建立tcp连接</li>
+<li>发起http请求：浏览器发起读取文件的http请求，该请求作为tcp三次握手的第三次数据发送给服务器</li>
+<li>服务器响应请求并返回结果：服务器对浏览器请求做出响应，并把对应的html文件发送给浏览器</li>
+<li>关闭tcp连接：通过4次挥手释放tcp连接</li>
+<li>浏览器渲染：解析html内容并渲染（css解析不会阻塞html解析，但是会阻塞html的渲染，因为css和html解析合成一起之后才能渲染）<blockquote>
+<p>构建DOM树：词法分析然后解析成DOM树是由dom元素及属性节点组成，树的根是document对象<br>构建css规则树<br>构建render树<br>布局<br>绘制</p>
+</blockquote>
+</li>
+<li>js引擎解析过程：<blockquote>
+<p>创建window对象<br>加载文件<br>预编译<br>解释执行</p>
+</blockquote>
+</li>
+</ol>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">元气满满</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://yoursite.com/2022/03/25/%E7%BD%91%E7%BB%9C/">http://yoursite.com/2022/03/25/%E7%BD%91%E7%BB%9C/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://yoursite.com" target="_blank">元气满满</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/tcp-ip/">tcp/ip</a></div><div class="post_share"><div class="social-share" data-image="https://cdn.jsdelivr.net/gh/jerryc127/CDN@latest/cover/default_bg3.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2022/05/16/ES/"><img class="prev-cover" src="https://cdn.jsdelivr.net/gh/jerryc127/CDN@latest/cover/default_bg3.png" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">浅聊ES</div></div></a></div><div class="next-post pull-right"><a href="/2022/02/22/%E5%AE%8F%E4%BB%BB%E5%8A%A1%E5%92%8C%E5%BE%AE%E4%BB%BB%E5%8A%A1/"><img class="next-cover" src="https://cdn.jsdelivr.net/gh/jerryc127/CDN@latest/cover/default_bg2.png" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">宏任务和微任务</div></div></a></div></nav></div><div class="aside_content" id="aside_content"><div class="card-widget card-info"><div class="card-content"><div class="card-info-avatar is-center"><img class="avatar-img" src="/null" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">元气满满</div><div class="author-info__description"></div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">30</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">32</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">20</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div></div><div class="card-widget card-announcement"><div class="card-content"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="card-content"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#TCP-IP"><span class="toc-number">1.</span> <span class="toc-text">TCP&#x2F;IP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B7%A8%E5%9F%9F"><span class="toc-number">2.</span> <span class="toc-text">跨域</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%9D%9E%E5%90%8C%E6%BA%90%E9%99%90%E5%88%B6"><span class="toc-number">2.1.</span> <span class="toc-text">非同源限制</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E8%B7%A8%E5%9F%9F%E6%96%B9%E6%B3%95"><span class="toc-number">2.2.</span> <span class="toc-text">解决跨域方法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%8E%E8%BE%93%E5%85%A5URL%E5%88%B0%E9%A1%B5%E9%9D%A2%E6%B8%B2%E6%9F%93"><span class="toc-number">3.</span> <span class="toc-text">从输入URL到页面渲染</span></a></li></ol></div></div></div><div class="card-widget card-recent-post"><div class="card-content"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/05/16/%E9%A1%B9%E7%9B%AE/" title="总结"><img src="https://cdn.jsdelivr.net/gh/jerryc127/CDN@latest/cover/default_bg.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="总结"/></a><div class="content"><a class="title" href="/2022/05/16/%E9%A1%B9%E7%9B%AE/" title="总结">总结</a><time datetime="2022-05-16T01:07:28.620Z" title="发表于 2022-05-16 09:07:28">2022-05-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/05/16/%E6%9D%82%E8%B0%88/" title="杂谈"><img src="https://cdn.jsdelivr.net/gh/jerryc127/CDN@latest/cover/default_bg3.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="杂谈"/></a><div class="content"><a class="title" href="/2022/05/16/%E6%9D%82%E8%B0%88/" title="杂谈">杂谈</a><time datetime="2022-05-16T01:07:28.619Z" title="发表于 2022-05-16 09:07:28">2022-05-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/05/16/wchart/" title="WeChat浅聊"><img src="https://cdn.jsdelivr.net/gh/jerryc127/CDN@latest/cover/default_bg.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="WeChat浅聊"/></a><div class="content"><a class="title" href="/2022/05/16/wchart/" title="WeChat浅聊">WeChat浅聊</a><time datetime="2022-05-16T01:07:28.618Z" title="发表于 2022-05-16 09:07:28">2022-05-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/05/16/aboutClone/" title="关于克隆那些事"><img src="https://cdn.jsdelivr.net/gh/jerryc127/CDN@latest/cover/default_bg.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="关于克隆那些事"/></a><div class="content"><a class="title" href="/2022/05/16/aboutClone/" title="关于克隆那些事">关于克隆那些事</a><time datetime="2022-05-16T01:07:28.615Z" title="发表于 2022-05-16 09:07:28">2022-05-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/05/16/ES/" title="浅聊ES"><img src="https://cdn.jsdelivr.net/gh/jerryc127/CDN@latest/cover/default_bg3.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="浅聊ES"/></a><div class="content"><a class="title" href="/2022/05/16/ES/" title="浅聊ES">浅聊ES</a><time datetime="2022-05-16T01:07:28.614Z" title="发表于 2022-05-16 09:07:28">2022-05-16</time></div></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By 元气满满</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><div class="js-pjax"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></div></body></html>
