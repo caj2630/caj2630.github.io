@@ -66,6 +66,11 @@ Sub.prototype.constructor = Sub
 ```
 *实例化Vnode：和普通的元素节点vnode不同，组件的vnode没有children。
 
+### 虚拟化DOM
+> 最大优势是抽象了原本到渲染过程；
+> 通过vnode，vue可以对树节点进行新增删除修改操作，经过diff算法比对进行最小单位修改，减少dom操作，提高性能达到最优
+> 传统的操作dom，比如操作10次，第一次的时候浏览器并不知道后面还有9次就立即开始渲染然后每次都要渲染一遍，虚拟dom是经过diff算法将10次操作进行比对存放到js对象中不会立即执行，将该对象添加到dom树上一次性渲染
+
 ### 组件传值
 
 一：父传子（props）
@@ -107,11 +112,11 @@ inject: ['name']
 
 // 方法二：挂载太多多余的属性
 // 祖/父组件
-provide () {
-    return {
-        parentObj: this // 将整个实例挂载
-    }
-}
+// provide () {
+//     return {
+//         parentObj: this // 将整个实例挂载
+//     }
+// }
 // 子组件 parentObj包含了传入的所有实例this的值
 inject: ['parentObj']
 
